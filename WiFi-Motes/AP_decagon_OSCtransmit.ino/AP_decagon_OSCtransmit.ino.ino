@@ -174,12 +174,17 @@ float temp = 0;
 float elec_c = 0;
 #endif
 
+// ================================================================
+// ===         Thermocouple Inclusions         ===
+// ================================================================
+
 void setup() {
+  Serial.begin(9600);
 #ifdef is_decagon
   deca_gs3_setup();
 #endif
+
   //Initialize serial and wait for port to open:
-  Serial.begin(9600);
   pinMode(led, OUTPUT);      // set the LED pin mode
 #ifdef transmit_butt
   pinMode(transmit_butt, INPUT_PULLUP);      // set the transmit_butt pin mode to input

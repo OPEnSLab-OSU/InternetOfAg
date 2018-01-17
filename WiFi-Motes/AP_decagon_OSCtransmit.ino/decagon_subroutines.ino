@@ -17,6 +17,26 @@ char *p;
 
 void deca_gs3_setup() {
   mySDI12.begin();
+  delay(2000);
+  //first command to take a measurement
+  myCommand = String(SENSOR_ADDRESS) + "I!";
+  Serial.println(myCommand);     // echo command to terminal
+
+  mySDI12.sendCommand(myCommand);
+  delay(30);                     // wait a while for a response
+
+  while (mySDI12.available()) {  // build response string
+    char c = mySDI12.read();
+    if ((c != '\n') && (c != '\r')) {
+      sdiResponse += c;
+      delay(5);
+    }
+  }
+  Serial.println(sdiResponse); //write the response to the screen
+  mySDI12.clearBuffer();
+
+  delay(1000);                 // delay between taking reading and requesting data
+  sdiResponse = "";           // clear the response string
 }
 
 void measure_decagon() {
@@ -68,12 +88,12 @@ void measure_decagon() {
   
   
   //if (sdiResponse.length() > 1) Serial.println(sdiResponse); //write the response to the screen
-  Serial.print("Dielectric Permittivity: ");
+  /*Serial.print("Dielectric Permittivity: ");
   Serial.println(dielec_p);
   Serial.print("Temperature (C): ");
   Serial.println(temp);
   Serial.print("Electric Conductivity: ");
-  Serial.println(elec_c);
+  Serial.println(elec_c);*/
   mySDI12.clearBuffer();
 }
 

@@ -222,8 +222,8 @@ void loop() {
 
 #ifdef is_tcouple
     measure_tcouple();
-
-    udp_tcouple();
+    delay(1000);
+    //udp_tcouple();
 #endif
 
     

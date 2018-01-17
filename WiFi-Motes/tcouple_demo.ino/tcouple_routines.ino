@@ -1,6 +1,3 @@
-
-#ifdef is_tcouple
-
 //Hardware SPI CS pin definition
 #define CS_PIN 10
 
@@ -10,8 +7,8 @@
 
 //Thermocouple type definition
 //#define TCTYPE K_TYPE
-//#define TCTYPE VMODE_G32
-#define TCTYPE VMODE_G8
+#define TCTYPE VMODE_G32
+//#define TCTYPE VMODE_G8
 
 //Defines gain for calculating voltage for VMODEs
 #if TCTYPE == VMODE_G32
@@ -21,7 +18,7 @@
 #endif
 
 //Thermocouple unit definition
-#define FAHRENHEIT
+//#define FAHRENHEIT
 #define CELCIUS
 
 //Library header file
@@ -81,29 +78,3 @@ void measure_tcouple() {
 #endif
 }
 
-void udp_tcouple() {
-  OSCBundle bndl;
-
-#if TCTYPE == K_TYPE
-
-#ifdef CELCIUS
-  bndl.add(IDString "/CJTemp_C").add((float)CJTemp);
-  bndl.add(IDString "/TCTemp_C").add((float)TCTemp);
-#endif
-
-#ifdef FAHRENHEIT
-  bndl.add(IDString "/CJTemp_F").add((float)(CJTemp * 1.8 + 32));
-  bndl.add(IDString "/TCTemp_F").add((float)(TCTemp * 1.8 + 32));
-#endif
-
-#elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
-  bndl.add(IDString "/voltage").add((float)(tc_vin));
-#endif
-
-
-  Udp.beginPacket(ip_broadcast, 9436);
-    bndl.send(Udp);
-  Udp.endPacket();
-}
-
-#endif
