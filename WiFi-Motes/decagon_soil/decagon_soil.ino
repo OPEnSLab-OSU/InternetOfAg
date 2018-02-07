@@ -23,7 +23,7 @@ Contact: github@emnet.net or @rinnamon on twitter
 #include "SDI12.h"
 #include <string.h>
 
-#define DATAPIN 11         // change to the proper pin
+#define DATAPIN 10         // change to the proper pin
 #define SENSOR_ADDRESS "?"
 
 SDI12 mySDI12(DATAPIN);

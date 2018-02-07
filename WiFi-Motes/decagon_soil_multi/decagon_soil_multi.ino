@@ -19,9 +19,6 @@ Extended by Ruben Kertesz in 2016
 Contact: github@emnet.net or @rinnamon on twitter
 */
 
-// NOT TESTED YET
-
-
 #include "SDI12.h"
 #include <string.h>
 
@@ -47,7 +44,11 @@ void setup() {
 }
 
 void loop() {
-  mySDI12.setActive();
+
+  // ===== Send Measure to Sensor 1 =====
+  
+  mySDI12.setActive(); //This command is necessary when working with multiple SDI-12 objects
+ 
   //first command to take a measurement
   myCommand = String(SENSOR_ADDRESS) + "M!";
   //Serial.println(myCommand);     // echo command to terminal
@@ -67,6 +68,8 @@ void loop() {
 
   sdiResponse = "";
 
+  // ===== Send Measure to Sensor 2 =====
+  
   mySDI12_2.setActive();
   mySDI12_2.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
@@ -85,8 +88,9 @@ void loop() {
   delay(1000);                 // delay between taking reading and requesting data
   sdiResponse = "";           // clear the response string
 
+  // ===== Retrieve Data from Sensor 1 =====
 
-// next command to request data from last measurement
+  // next command to request data from last measurement
   myCommand = String(SENSOR_ADDRESS) + "D0!";
 
   mySDI12.setActive();
@@ -112,7 +116,9 @@ void loop() {
 
   sdiResponse = "";
 
-  mySDI12_2.setActive();
+  // ===== Retrieve Data from Sensor 2 =====
+
+  mySDI12_2.setActive(); 
   mySDI12_2.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
 
