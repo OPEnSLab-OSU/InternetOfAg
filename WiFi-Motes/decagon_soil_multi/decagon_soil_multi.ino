@@ -47,8 +47,8 @@ void setup() {
 }
 
 void loop() {
-
-//first command to take a measurement
+  mySDI12.setActive();
+  //first command to take a measurement
   myCommand = String(SENSOR_ADDRESS) + "M!";
   //Serial.println(myCommand);     // echo command to terminal
 
@@ -67,6 +67,7 @@ void loop() {
 
   sdiResponse = "";
 
+  mySDI12_2.setActive();
   mySDI12_2.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
 
@@ -88,6 +89,7 @@ void loop() {
 // next command to request data from last measurement
   myCommand = String(SENSOR_ADDRESS) + "D0!";
 
+  mySDI12.setActive();
   mySDI12.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
 
@@ -110,6 +112,7 @@ void loop() {
 
   sdiResponse = "";
 
+  mySDI12_2.setActive();
   mySDI12_2.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
 
