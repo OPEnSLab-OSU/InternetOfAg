@@ -21,16 +21,23 @@ Contact: github@emnet.net or @rinnamon on twitter
 
 #include "SDI12.h"
 #include <string.h>
+#include "SensorList.h"
 
-#define DATAPIN1 11  // change to the proper pin
-#define DATAPIN2 10
+#define DATAPIN1 A0  // change to the proper pin
+#define DATAPIN2 A1
+#define DATAPIN3 A2
+#define DATAPIN4 A3
+#define DATAPIN5 A4
+#define DATAPIN6 A5
 #define SENSOR_ADDRESS "?"
 
-SDI12 mySDI12(DATAPIN1);
-SDI12 mySDI12_2(DATAPIN2);
+SDI12 mySDI12[6] = {DATAPIN1, DATAPIN2, DATAPIN3, DATAPIN4, DATAPIN5, DATAPIN6};
+
+//SDI12 mySDI12(DATAPIN1);
+
+struct SensorList data;
 
 String sdiResponse = "";
-String myCommand = "";
 char buf[20];
 char *p = buf;
 float dielec_p = 0;
@@ -39,121 +46,39 @@ float elec_c = 0;
 
 void setup() {
   Serial.begin(9600);
-  mySDI12.begin();
-  mySDI12_2.begin();
+  delay(2000);
+  
+  for (int i = 0; i < 6; i++) {
+    mySDI12[i].begin();
+    mySDI12[i].forceHold();
+  }
 }
 
 void loop() {
 
-  // ===== Send Measure to Sensor 1 =====
+  // ===== Poll Sensors =====
+
+  data = poll_sensors(mySDI12);
+
+  // ===== Send Measure to Active Sensors =====
   
-  mySDI12.setActive(); //This command is necessary when working with multiple SDI-12 objects
- 
-  //first command to take a measurement
-  myCommand = String(SENSOR_ADDRESS) + "M!";
-  //Serial.println(myCommand);     // echo command to terminal
-
-  mySDI12.sendCommand(myCommand);
-  delay(30);                     // wait a while for a response
-
-  while (mySDI12.available()) {  // build response string
-    char c = mySDI12.read();
-    if ((c != '\n') && (c != '\r')) {
-      sdiResponse += c;
-      delay(5);
-    }
+  for (int i = 0; i < data.count; i++) {
+    int num = data.list[i];
+    get_measure(&mySDI12[num]);
   }
-
-  mySDI12.clearBuffer();
-
-  sdiResponse = "";
-
-  // ===== Send Measure to Sensor 2 =====
-  
-  mySDI12_2.setActive();
-  mySDI12_2.sendCommand(myCommand);
-  delay(30);                     // wait a while for a response
-
-  while (mySDI12_2.available()) {  // build response string
-    char c = mySDI12_2.read();
-    if ((c != '\n') && (c != '\r')) {
-      sdiResponse += c;
-      delay(5);
-    }
-  }
-  //if (sdiResponse.length() > 1) Serial.println(sdiResponse); //write the response to the screen
-  mySDI12_2.clearBuffer();
-
 
   delay(1000);                 // delay between taking reading and requesting data
-  sdiResponse = "";           // clear the response string
 
-  // ===== Retrieve Data from Sensor 1 =====
+  // ===== Retrieve Data from Active Sensors =====
 
-  // next command to request data from last measurement
-  myCommand = String(SENSOR_ADDRESS) + "D0!";
-
-  mySDI12.setActive();
-  mySDI12.sendCommand(myCommand);
-  delay(30);                     // wait a while for a response
-
-  while (mySDI12.available()) {  // build string from response
-    char c = mySDI12.read();
-    if ((c != '\n') && (c != '\r')) {
-      sdiResponse += c;
-      delay(5);
-    }
+  for (int i = 0; i < data.count; i++) {
+    int num = data.list[i];
+    sdiResponse = get_data(&mySDI12[num]);
+    Serial.print("Data from pin A");
+    Serial.print(num);
+    Serial.print(": ");
+    Serial.println(sdiResponse);
+    sdiResponse = "";
   }
-
-  sdiResponse.toCharArray(buf, sizeof(buf));
-
-  p = buf;
-
-  Serial.print("Decagon Sensor 1: ");
-  Serial.println(p);
-
-  mySDI12.clearBuffer();
-
-  sdiResponse = "";
-
-  // ===== Retrieve Data from Sensor 2 =====
-
-  mySDI12_2.setActive(); 
-  mySDI12_2.sendCommand(myCommand);
-  delay(30);                     // wait a while for a response
-
-  while (mySDI12_2.available()) {  // build string from response
-    char c = mySDI12_2.read();
-    if ((c != '\n') && (c != '\r')) {
-      sdiResponse += c;
-      delay(5);
-    }
-  }
-
-  sdiResponse.toCharArray(buf, sizeof(buf));
-
-  p = buf;
-
-  Serial.print("Decagon Sensor 2: ");
-  Serial.println(p);
-
-/*
-  strtok_r(p, "+", &p);
-  dielec_p = atof(strtok_r(NULL, "+", &p));
-  temp = atof(strtok_r(NULL, "+", &p));
-  elec_c = atof(strtok_r(NULL, "+", &p));
-*/
-  
-  
-  //if (sdiResponse.length() > 1) Serial.println(sdiResponse); //write the response to the screen
-  /*Serial.print("Dielectric Permittivity: ");
-  Serial.println(dielec_p);
-  Serial.print("Temperature (C): ");
-  Serial.println(temp);
-  Serial.print("Electric Conductivity: ");
-  Serial.println(elec_c);*/
-  
-  mySDI12_2.clearBuffer();
-
-//now go back to top and wait until user hits enter on terminal window
+  if (data.count == 0) Serial.println("No sensors found");
 }
