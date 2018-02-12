@@ -18,7 +18,6 @@ char* get_OSC_string(OSCBundle bndl) {
   
   while(msg != NULL) {
     msg->getAddress(buf, 0);
-    type = msg->getType(0);
     
     /*Serial.print("Address ");
     Serial.print(n+1);
@@ -27,25 +26,39 @@ char* get_OSC_string(OSCBundle bndl) {
 
     strcat(string, buf);
 
-    if (type == 'f') {
-      value.f = msg->getFloat(0);
-      /*Serial.print("Value ");
-      Serial.print(n+1);
-      Serial.print(": ");
-      Serial.println(value);*/
+    int m = 0;
+    type = msg->getType(m);
 
-      snprintf(buf, 50, " f%lu", value.u);
-      strcat(string, buf);
-    }
-    else if (type == 'i') {
-      value.i = msg->getInt(0);
-      /*Serial.print("Value ");
-      Serial.print(n+1);
-      Serial.print(": ");
-      Serial.println(value);*/
+    while(type != '\0') {
 
-      snprintf(buf, 50, " i%lu", value.u);
-      strcat(string, buf);
+      if (type == 'f') {
+        value.f = msg->getFloat(m);
+        /*Serial.print("Value ");
+        Serial.print(n+1);
+        Serial.print(": ");
+        Serial.println(value);*/
+
+        snprintf(buf, 50, " f%lu", value.u);
+        strcat(string, buf);
+      }
+      else if (type == 'i') {
+        value.i = msg->getInt(m);
+        /*Serial.print("Value ");
+        Serial.print(n+1);
+        Serial.print(": ");
+        Serial.println(value);*/
+
+        snprintf(buf, 50, " i%lu", value.u);
+        strcat(string, buf);
+      }
+      else if (type == 's') {
+        char val_buf[10];
+        msg->getString(m, val_buf);
+
+        snprintf(buf, 50, " s%s", val_buf);
+      }
+      m++;
+      type = msg->getType(m);
     }
     n++;
     msg = bndl.getOSCMessage(n);
@@ -62,20 +75,36 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
   data_vals value_union;
   char buf[121];
   char *p = buf;
-  char *addr = NULL, *value = NULL;
+  char *token = NULL;
   strcpy(buf, string);
-  addr = strtok_r(p, " ", &p);
-  while (addr != NULL & strlen(addr) > 0) {
-    value = strtok_r(NULL, " ", &p);
-    value_union.u = strtoul(&value[1], NULL, 0);
-    if (value[0] == 'f') {
+  OSCMessage msg;
+  token = strtok_r(p, " ", &p);
+  while (token != NULL & strlen(token) > 0) {
+    if (token[0] == '/') {
+      msg = bndl->add(token);
+    }
+    else if (token[0] == 'f') {
+      value_union.u = strtoul(&token[1], NULL, 0);
+      msg.add(value_union.f);
+    }
+    else if (token[0] == 'i') {
+      value_union.u = strtoul(&token[1], NULL, 0);
+      msg.add(value_union.i);
+    }
+    else if (token[0] == 's') {
+      msg.add(&token[1]);
+    }
+    
+    
+    /*value_union.u = strtoul(&token[1], NULL, 0);
+    if (token[0] == 'f') {
       bndl->add(addr).add(value_union.f);
       Serial.print("Address: ");
       Serial.println(addr);
       Serial.print("Value: ");
       Serial.println(value_union.f);
     }
-    else if (value[0] == 'i') {
+    else if (token[0] == 'i') {
       bndl->add(addr).add(value_union.i);
       Serial.print("Address: ");
       Serial.println(addr);
@@ -83,7 +112,42 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
       Serial.println(value_union.i);
     }
 
-    addr = strtok_r(p, " ", &p);
+    addr = strtok_r(p, " ", &p);*/
+  }
+}
+
+void print_bundle(OSCBundle *bndl) {
+  int n = 0;
+  char buf[50];
+  char type;
+  OSCMessage *msg = bndl.getOSCMessage(n);
+  while(msg != NULL) {
+    msg->getAddress(buf, 0);
+    Serial.print("Address ");
+    Serial.print(n+1);
+    Serial.print(": ");
+    Serial.println(buf);
+
+    int m = 0;
+    type = msg->getType(m);
+    while(type != '\0') {
+      Serial.print("Value ");
+      Serial.print(m+1);
+      Serial.print(": ");
+      if (type == 'f') {
+        Serial.println(msg->getFloat(m));
+      }
+      else if (type == 'i') {
+        Serial.println(msg->getInt(m));
+      }
+      else if (type == 's') {
+        msg->getString(m, buf);
+        Serial.println(buf);
+      }
+      
+      m++;
+      type = msg->getType(m);
+    }
   }
 }
 

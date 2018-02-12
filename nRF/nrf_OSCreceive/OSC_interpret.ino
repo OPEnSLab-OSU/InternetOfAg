@@ -70,17 +70,17 @@ void get_OSC_bundle(char *string, OSCBundle *bndl) {
     value_union.u = strtoul(&value[1], NULL, 0);
     if (value[0] == 'f') {
       bndl->add(addr).add(value_union.f);
-      /*Serial.print("Address: ");
+      Serial.print("Address: ");
       Serial.println(addr);
       Serial.print("Value: ");
-      Serial.println(value_union.f);*/
+      Serial.println(value_union.f);
     }
     else if (value[0] == 'i') {
       bndl->add(addr).add(value_union.i);
-      /*Serial.print("Address: ");
+      Serial.print("Address: ");
       Serial.println(addr);
       Serial.print("Value: ");
-      Serial.println(value_union.i);*/
+      Serial.println(value_union.i);
     }
 
     addr = strtok_r(p, " ", &p);

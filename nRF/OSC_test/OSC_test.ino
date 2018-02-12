@@ -68,5 +68,5 @@ void loop() {
   //}
   free(string);
   bndl.empty();
-  Serial.println("Why won't this work");
+  //Serial.println("Why won't this work");
 }
