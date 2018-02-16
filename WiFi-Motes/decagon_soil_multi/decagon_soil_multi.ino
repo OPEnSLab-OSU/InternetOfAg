@@ -7,12 +7,12 @@ Decagon shield polling functionality demo
 #include "SensorList.h"
 #include <EnableInterrupt.h>
 
-#define DATAPIN1 8  // change to the proper pin
-#define DATAPIN2 9
-#define DATAPIN3 10
-#define DATAPIN4 11
-#define DATAPIN5 14
-#define DATAPIN6 15
+#define DATAPIN1 A0  // change to the proper pin
+#define DATAPIN2 A1
+#define DATAPIN3 A2
+#define DATAPIN4 A3
+#define DATAPIN5 A4
+#define DATAPIN6 A5
 #define SENSOR_ADDRESS "?"
 
 //Declare 6 SDI-12 objects initialized with DATAPIN1-6
