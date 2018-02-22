@@ -53,7 +53,11 @@ void loop() {
     bndl.add(IDString "/Temp").add((int32_t)-1);
     bndl.add(IDString "/ElecCond").add((float)3.0);
 
-    char *message = get_OSC_string(bndl);
+    char message[121];
+
+    memset(message, '\0', 121);
+
+    get_OSC_string(&bndl, message);
     //char msg[120];
     //strcpy(msg, message);
 
@@ -67,7 +71,6 @@ void loop() {
     else
       Serial.println("failed.");
 
-    free(message);
   }
 }
 
