@@ -5,15 +5,32 @@ Decagon shield polling functionality demo
 #include "SDI12.h"
 #include <string.h>
 #include "SensorList.h"
+#define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+//#define F_M0
+#define F_32U4
+
+#ifdef F_M0
 #define DATAPIN1 A0  // change to the proper pin
 #define DATAPIN2 A1
 #define DATAPIN3 A2
 #define DATAPIN4 A3
 #define DATAPIN5 A4
 #define DATAPIN6 A5
+#endif
+
+#ifdef F_32U4
+#define DATAPIN1 9  // change to the proper pin
+#define DATAPIN2 10
+#define DATAPIN3 11
+#define DATAPIN4 14
+#define DATAPIN5 15
+#define DATAPIN6 16
+#endif
+
 #define SENSOR_ADDRESS "?"
+
 
 //Declare 6 SDI-12 objects initialized with DATAPIN1-6
 SDI12 mySDI12[6] = {DATAPIN1, DATAPIN2, DATAPIN3, DATAPIN4, DATAPIN5, DATAPIN6};
@@ -61,7 +78,7 @@ void loop() {
     get_measure(&mySDI12[num]);
   }
 
-  delay(1000);                 // delay between taking reading and requesting data
+  delay(1000);     // delay between taking reading and requesting data
 
   // ===== Retrieve Data from Active Sensors =====
 
@@ -80,5 +97,6 @@ void loop() {
   // ===== Print Data to Serial Monitor =====
 
   print_data(data);
+
   delay(3000);
 }
