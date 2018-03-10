@@ -14,6 +14,13 @@ OSCErrorCode error;
 int transmission_period = 15000;     //The number of milliseconds between when the decagon finishes transmitting
                                     // and starts the reading again   
 
+#ifdef __SAMD21G18A__
+
+#endif
+#ifdef __AVR_ATmega32U4__
+
+#endif
+
 //------------------------------------------------------------------------------------------------------
 // DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
 //------------------------------------------------------------------------------------------------------
