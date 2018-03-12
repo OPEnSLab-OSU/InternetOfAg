@@ -48,6 +48,10 @@ void loop() {
     if (manager.recvfromAck(buf, &len, &from)) {
       OSCBundle bndl;
       get_OSC_bundle((char*)buf, &bndl);
+
+      //Insert operation code here
+      //OSCBundle should container received data
+
       Serial.print("Received message from ");
       Serial.print(from);
       Serial.print(": ");
