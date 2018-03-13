@@ -64,7 +64,7 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 RHReliableDatagram manager(rf95, CLIENT_ADDRESS);
 
 OSCBundle bndl;
-//char message[241];
+char message[241];
 uint8_t data[] = "Hello world";
 //***********************************************//
 
@@ -367,6 +367,8 @@ void setup(void)
  // address_polling_example();
  
   // Now we're ready to get readings ... move on to loop()!
+  
+   memset(message, '\0', 241);
 }
 
 /**************************************************************************/
@@ -387,7 +389,7 @@ void simpleRead(Adafruit_TSL2591 *ts)
   Serial.print(F("[ ")); Serial.print(millis()); Serial.print(F(" ms ] "));
   Serial.print(F("Luminosity: "));
   Serial.println(x, DEC);
-  bndl.add(IDString "/Lux:").add(x);
+  bndl.add(IDString "/Lux:").add((int32_t)x);
 
 }
 
@@ -406,14 +408,14 @@ void sht31_sensor_read(Adafruit_SHT31 *sht31)
   
   if (! isnan(t)) {  // check if 'is not a number'
     Serial.print("Temp *C = "); Serial.print(t);
-    bndl.add(IDString "/Temp:").add(t);
+    bndl.add(IDString "/Temp:").add((float)t);
   } else { 
     Serial.println("Failed to read temperature");
   }
   
   if (! isnan(h)) {  // check if 'is not a number'
     Serial.print("  Hum. % = "); Serial.print(h);
-    bndl.add(IDString "/Humidity:").add(h);
+    bndl.add(IDString "/Humidity:").add((float)h);
   } else { 
     Serial.println("Failed to read humidity");
   }
@@ -439,9 +441,9 @@ void fxas_sensor_read(Adafruit_FXAS21002C *gyro)
   Serial.print("Z: "); Serial.print(event.gyro.z); Serial.print("  ");
   Serial.println("rad/s ");
   
-  bndl.add(IDString "/X:").add((int32_t)event.gyro.x);
-  bndl.add(IDString "/Y:").add((int32_t)event.gyro.y);
-  bndl.add(IDString "/Z:").add((int32_t)event.gyro.z);
+  bndl.add(IDString "/X").add((int32_t)event.gyro.x);
+  bndl.add(IDString "/Y").add((int32_t)event.gyro.y);
+  bndl.add(IDString "/Z").add((int32_t)event.gyro.z);
   
 }
 
@@ -465,9 +467,9 @@ void fxos_sensor_read(Adafruit_FXOS8700 *accelmag)
   Serial.print("Y: "); Serial.print(aevent.acceleration.y, 4); Serial.print("  ");
   Serial.print("Z: "); Serial.print(aevent.acceleration.z, 4); Serial.print("  ");
   Serial.println("m/s^2");
-  bndl.add(IDString "/X:").add((int32_t)aevent.acceleration.x);
-  bndl.add(IDString "/Y:").add((int32_t)aevent.acceleration.y);
-  bndl.add(IDString "/Z:").add((int32_t)aevent.acceleration.z);
+  bndl.add(IDString "/X").add((int32_t)aevent.acceleration.x);
+  bndl.add(IDString "/Y").add((int32_t)aevent.acceleration.y);
+  bndl.add(IDString "/Z").add((int32_t)aevent.acceleration.z);
 
   /* Display the mag results (mag data is in uTesla) */
   /*
@@ -547,9 +549,6 @@ void sensor_measurement(uint8_t addr){
    else{
      Serial.println("This sensor is not currently supported by the Project LOOM sytem");
    }
-
-   char message[241];
-   memset(message, '\0', 241);
    get_OSC_string(&bndl, message);
 
    Serial.println(message);
@@ -565,7 +564,10 @@ void sensor_measurement(uint8_t addr){
       Serial.println("ok");
    else
       Serial.println("failed");
-//Seral.print("Found I2C 0x");  Serial.println(addr,HEX);
+
+   bndl.empty();
+   memset(message, '\0', 241);
+      //Seral.print("Found I2C 0x");  Serial.println(addr,HEX);
 }
 
 //reads measurements from fsr
