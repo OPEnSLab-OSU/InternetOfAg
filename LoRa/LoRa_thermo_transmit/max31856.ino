@@ -95,9 +95,9 @@ void udp_tcouple() {
 #endif
 
 
-  Udp.beginPacket(ip_broadcast, 9436);
+  /*Udp.beginPacket(ip_broadcast, 9436);
     bndl.send(Udp);
-  Udp.endPacket();
+  Udp.endPacket();*/
 }
 
 #endif

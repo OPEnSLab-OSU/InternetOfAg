@@ -61,7 +61,7 @@ to
 #endif 
 
 // Define your sensor type here by commenting and un-commenting
-#define is_analog 2      // also define number of channels
+//#define is_analog 2      // also define number of channels
 //#define is_i2c 0x68      // also define i2c address of device
 #define transmit_butt 10        // using on-board button, specify attached pin, transmitting 
 #define VBATPIN A7       // Pin to check for battery voltage

@@ -36,7 +36,7 @@ void setup() {
   }
   
   rf95.setTxPower(23, false);
-
+  
 }
 
 void loop() {
@@ -55,7 +55,7 @@ void loop() {
       Serial.print("Received message from ");
       Serial.print(from);
       Serial.print(": ");
-      //Serial.println((char*)buf);
+      Serial.println((char*)buf);
       bndl.send(Serial);
       Serial.println("");
     }
