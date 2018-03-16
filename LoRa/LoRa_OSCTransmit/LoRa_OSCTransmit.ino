@@ -80,9 +80,9 @@ void loop() {
 
   OSCBundle bndl;
 
-  bndl.add(IDString "/VWC").add(value1);
+  bndl.add(IDString "/VWC").add((int32_t)value1);
   bndl.add(IDString "/Temp").add(value2);
-  bndl.add(IDString "/ElecCond").add(value3);
+  bndl.add(IDString "/ElecCond").add((int32_t)value3);
 
   // ===== Send message =====
   char message[241];

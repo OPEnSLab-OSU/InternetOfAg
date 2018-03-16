@@ -59,7 +59,7 @@ void loop() {
   if ( now - last_sent >= interval  )
   {
 #ifdef is_tcouple
-    measure_tcouple();
+    //measure_tcouple();
 #endif
 
     last_sent = now;

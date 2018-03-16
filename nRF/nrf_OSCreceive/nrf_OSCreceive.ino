@@ -1,12 +1,4 @@
 /*
- Copyright (C) 2012 James Coliz, Jr. <maniacbug@ymail.com>
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- version 2 as published by the Free Software Foundation.
- 
- Update 2014 - TMRh20
- */
 
 /**
  * Simplest possible example of using RF24Network,
@@ -25,7 +17,8 @@ RF24 radio(5,6);                // nRF24L01(+) radio attached using Getting Star
 RF24Network network(radio);      // Network uses that radio
 const uint16_t this_node = 01;    // Address of our node in Octal format ( 04,031, etc)
 const uint16_t other_node = 00;   // Address of the other node in Octal format
-
+unsigned long start_time = millis();
+unsigned long total_bytes = 0;
 char message[121];
 
 void setup(void)
@@ -57,11 +50,16 @@ void loop(void){
     //Serial.print("Message: ");
     //Serial.println(message);
 
+    //total_bytes += strlen(message);
+
     OSCBundle bndl;
     get_OSC_bundle(message, &bndl);
 
     bndl.send(Serial);
     Serial.println("");
+    //Serial.print("Data rate: ");
+    //Serial.print((float)total_bytes/((millis() - start_time)/1000));
+    //Serial.println(" Byte per second");
   }
 }
 

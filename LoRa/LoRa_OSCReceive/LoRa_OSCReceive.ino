@@ -52,12 +52,12 @@ void loop() {
       //Insert operation code here
       //OSCBundle should container received data
 
-      Serial.print("Received message from ");
-      Serial.print(from);
-      Serial.print(": ");
-      Serial.println((char*)buf);
-      bndl.send(Serial);
-      Serial.println("");
+      //Serial.print("Received message from ");
+      //Serial.print(from);
+      //Serial.print(": ");
+      //Serial.println((char*)buf);
+      //bndl.send(Serial);
+      //Serial.println("");
     }
   }
 }

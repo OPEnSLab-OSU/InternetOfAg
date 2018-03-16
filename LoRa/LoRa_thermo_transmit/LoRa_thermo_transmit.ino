@@ -93,7 +93,7 @@ void loop() {
 
   OSCBundle bndl;
 
-  bndl.add(IDString "/CJTemp_C").add((float)CJTemp);
+  //bndl.add(IDString "/CJTemp_C").add((float)CJTemp);
   bndl.add(IDString "/TCTemp_C").add((float)TCTemp);
   
   // ===== Send message =====

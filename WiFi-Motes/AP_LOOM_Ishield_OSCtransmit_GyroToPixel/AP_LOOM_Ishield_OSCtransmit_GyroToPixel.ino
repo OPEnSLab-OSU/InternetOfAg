@@ -57,7 +57,7 @@ int led =  LED_BUILTIN;
 // DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
 //------------------------------------------------------------------------------------------------------
 #ifndef DEBUG
-#define DEBUG 1
+#define DEBUG 0
 #endif
 
 //------------------------------------------------------------------------------------------------------
