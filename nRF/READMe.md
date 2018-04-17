@@ -1,9 +1,13 @@
+# Dependencies
+
 The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
-Uses RF24 and RF24Network libraries located here:
--
--
-Other Dependencies:
--
+
+## RF24 Libraries:
+* [RF24](https://github.com/nRF24/RF24)
+* [RF24Network](https://github.com/nRF24/RF24Network)
+
+## Other Libraries:
+* [OSC Arduino Library](https://github.com/CNMAT/OSC)
 
 Significant code structure pulled from:
 2011 James Coliz, Jr. <maniacbug@ymail.com>

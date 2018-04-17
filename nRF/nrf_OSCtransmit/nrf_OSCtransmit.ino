@@ -52,17 +52,19 @@ void loop() {
     bndl.add(IDString "/VWC").add((float)1.0);
     bndl.add(IDString "/Temp").add((int32_t)-1);
     bndl.add(IDString "/ElecCond").add((float)3.0);
+    bndl.add(IDString "/TestVal").add("OkayOkayOkayOkay").add("MoreValuesHere");
+    bndl.add(IDString "/WowMoreValues").add((float)6);
 
-    char message[121];
+    char message[300];
 
-    memset(message, '\0', 121);
+    memset(message, '\0', 300);
 
     get_OSC_string(&bndl, message);
     //char msg[120];
     //strcpy(msg, message);
 
-    //Serial.println(message);
-    //Serial.println(strlen(message));
+    Serial.println(message);
+    Serial.println(strlen(message));
     
     RF24NetworkHeader header(/*to node*/ other_node);
     bool ok = network.write(header,message,strlen(message));
