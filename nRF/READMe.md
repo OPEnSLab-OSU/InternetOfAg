@@ -1,12 +1,13 @@
-# Dependencies
+# Project LOOM: Nordic RF
 
 The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
 
-## RF24 Libraries:
+## Dependencies
+### RF24 Libraries:
 * [RF24](https://github.com/nRF24/RF24)
 * [RF24Network](https://github.com/nRF24/RF24Network)
 
-## Other Libraries:
+### Other Libraries:
 * [OSC Arduino Library](https://github.com/CNMAT/OSC)
 
 Significant code structure pulled from:
