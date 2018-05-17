@@ -40,7 +40,7 @@
 #define SENSORCOUNT 1
 #endif //is_32U4
 
-#define DATAPIN1 10  // change to the proper pin
+#define DATAPIN1 11  // change to the proper pin
 #define DATAPIN2 A0
 #define DATAPIN3 A1
 #define DATAPIN4 A3
@@ -70,7 +70,7 @@ String sdiResponse = "";
 #define RFM95_INT 7
 #endif
 
-#define SERVER_ADDRESS 2
+#define SERVER_ADDRESS 88
 
 //battery voltage read pin
 #ifdef is_M0
@@ -106,7 +106,7 @@ RHReliableDatagram manager(rf95, INSTANCE_NUM + 10);
 
 // ===== RTC Initializations =====
 
-#define RTC3231
+//#define RTC3231
 
 #ifdef RTC3231
 RTC_DS3231 RTC_DS;
@@ -177,8 +177,9 @@ void setup() {
 }
 
 void loop() {
-  rf95.sleep();
+
 #ifdef RTC3231
+  rf95.sleep();
 
 #ifdef is_M0
   attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, LOW);
@@ -200,14 +201,6 @@ void loop() {
 #ifdef RTC3231
   if(TakeSampleFlag)
   { 
-
-#ifdef is_M0
-    //detachInterrupt(digitalPinToInterrupt(wakeUpPin));
-#endif //is_M0
-
-#ifdef is_32U4
-    //disableInterrupt(wakeUpPin);
-#endif //is_32U4
 
     clearAlarmFunction(); // Clear RTC Alarm
     
@@ -288,11 +281,16 @@ void loop() {
     }
   }
 
+#ifndef RTC3231
+  delay(10000); //Give some time between measurements if no RTC
+#endif //not RTC3231
+
 #ifdef RTC3231
   setAlarmFunction();
   delay(75);  // delay so serial stuff has time to print out all the way
   TakeSampleFlag = false; // Clear Sample Flag
   }
 #endif //RTC3231
+
 
 }

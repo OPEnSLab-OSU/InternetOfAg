@@ -8,7 +8,7 @@
 #define RFM95_INT 3 //Use this for the M0
 //#define RFM95_INT 7 //Use this for the 32u4
 
-#define CLIENT_ADDRESS 0
+#define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 88
  
 // Change to 434.0 or other frequency, must match RX's freq!
@@ -43,12 +43,10 @@ void loop() {
     if (manager.recvfromAck(buf, &len, &from)) {
       OSCBundle bndl;
       get_OSC_bundle((char*)buf, &bndl);
-      Serial.print("Received message from ");
-      Serial.print(from);
-      Serial.print(": ");
-      //Serial.println((char*)buf);
-      bndl.send(Serial);
-      Serial.println("");
+      //if (strlen((char*)buf) != 0) {
+        Serial.println("\nReceived message:");
+        print_bundle(&bndl);
+      //}
     }
   }
 }
