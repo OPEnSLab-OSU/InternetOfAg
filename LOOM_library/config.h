@@ -12,16 +12,17 @@
 #define is_wifi    1
 #define is_lora    0
 
-#define is_ishield 1
+#define is_ishield 0
 #define num_servos 0
 #define num_steppers 0
 #define is_relay   0
-#define num_analog  2
+#define num_analog  0
 #define is_decagon 0
 //Multiplexer
-#define is_tca9548a 0
+#define is_tca9548a 1
 
 #if is_tca9548a == 1
+  #define MUX_CONFIG 1 //0 is static, 1 is dynamic
 	#define UPDATE_PERIOD 5000 //milliseconds
 	//Lux Sensor
 	#define is_tsl2591 1

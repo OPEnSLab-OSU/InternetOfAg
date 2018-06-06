@@ -276,6 +276,8 @@ void send_sensor_list(OSCMessage &msg)
 //
 void update_sensors() 
 {
+  
+  byte devices[16][2];
 	uint8_t current_ind = 0;
 	for (uint8_t t=0; t<8; t++){
 		tcaseselect(t);
@@ -294,16 +296,28 @@ void update_sensors()
 				if (error == 0) {
 			#endif
 					if (i2c_addr != 0x00){
-						state_tca9548a.devices[current_ind][0] = t;
-						state_tca9548a.devices[current_ind][1] = i2c_addr;
+						devices[current_ind][0] = t;
+						devices[current_ind][1] = i2c_addr;
+            #if MUX_CONFIG == 1 //DYNAMIC configuration
+              
+              if (i2c_addr == 0x68 || i2c_addr == 0x69){
+                if (devices[current_ind][0] != state_tca9548a.devices[current_ind][0] || devices[current_ind][1] != state_tca9548a.devices[current_ind][1]){ //if there has been a change
+                  calMPU6050();
+                }
+              }
+            #endif
 						current_ind++;
 					}
 				}
 				
 		}
 		for (uint8_t ind = current_ind; ind < 16; ind++){
-				state_tca9548a.devices[ind][0] = 8;
+				devices[ind][0] = 8;
 		}
+    for (uint8_t ind = 0; ind < 16; ind++){
+        state_tca9548a.devices[ind][0] = devices[ind][0];
+        state_tca9548a.devices[ind][1] = devices[ind][1];
+    }
 	}
 }
 
