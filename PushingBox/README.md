@@ -95,13 +95,13 @@ To test PushingBox, build a URL in the format and paste into a browser:
 
 **New Format:**
 
-`http://api.pushingbox.com/pushingbox?devid=[DEVICE-ID]&key0=sheetID&val0=[SHEET-ID]&key2=deviceID&val2=[DEVICE-NAME]&key3=full_data&val3=[datakey1]~[dataval1]~[datakey2]~[dataval2]`
+`http://api.pushingbox.com/pushingbox?devid=[DEVICE-ID]&key0=sheetID&val0=[SHEET-ID]&key1=tabID&val1=[TAB-ID]&key2=deviceID&val2=[DEVICE-NAME]&key3=full_data&val3=[datakey1]~[dataval1]~[datakey2]~[dataval2]`
 
 *Individual keys and values are used for the metadata / routing information, while the data itself is contained in a single argument (val3, associated with key3, 'full_data') which is a string of interleaved keys and values separated by tildes (~)*. 
 
 **Old Format:**
 
-`http://api.pushingbox.com/pushingbox?devid=[DEVICE-ID]&key0=sheetID&val0=[SHEET-ID]&key2=deviceID&val2=[DEVICE-NAME]&key3=[KEY-NAME]&val3=[VALUE]`
+`http://api.pushingbox.com/pushingbox?devid=[DEVICE-ID]&key0=sheetID&val0=[SHEET-ID]&key1=tabID&val1=[TAB-ID]&key2=deviceID&val2=[DEVICE-NAME]&key3=[KEY-NAME]&val3=[VALUE]`
 
 *This is the old format that was limited to 16 key-value pairs and is associated with the `Legacy_Spreadsheet.gs` Google App script file.*
 
