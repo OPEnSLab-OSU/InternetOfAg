@@ -43,7 +43,7 @@ Or:
 
 - Find the 'Dependencies' folder in the InternetOfAg folder
 - Select all of the zip folders
-- Right-click and use 7zip or equivalent to extract the folders
+- Right-click and use 7zip or equivalent to extract the folders (use "extract here")
 - Once all of the zip files have been extracted as folders, drag them all to the folder: `Documents/Arduino/libraries ` 
 
 ### Other Libraries
