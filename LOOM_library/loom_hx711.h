@@ -100,7 +100,7 @@ void package_hx711(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/hx711_loadcell");
+	sprintf(address_string, "%s%s", packet_header_string, "/loadcell");
 	bndl->add(address_string).add(state_hx711.loadcell);
 }
 

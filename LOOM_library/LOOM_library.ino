@@ -25,7 +25,6 @@ void setup()
 	Loom_begin();	
 
 	// Any custom setup code
-
 }
 
 // ================================================================ 
@@ -35,15 +34,18 @@ void loop()
 {
 	OSCBundle bndl;
 
-
-
 	// --- Basic Example ---
+
+	// receive_bundle(&bndl, WIFI);
+	// process_bundle(&bndl);
 
 	measure_sensors();				// Read sensors, store data in sensor state struct
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
-	
 	print_bundle(&bndl);
-
+	
+	// log_bundle(&bndl, SDCARD, "evapdata.csv");
+	// send_bundle(&bndl, WIFI);
+	// 
 	delay(1000);
 
 	additional_loop_checks();		// Miscellaneous checks

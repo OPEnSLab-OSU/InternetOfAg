@@ -32,6 +32,8 @@ float analog_convert_voltage(int analog); // example
 float analog_convert_thermistor(int analog);
 float analog_convert_ph(int analog);
 
+float analog_convert_turbidity(int analog);
+
 
 // ================================================================ 
 // ===                     CONVERSION ARRAY                     === 
@@ -41,7 +43,8 @@ static convertRetFuncPtr conversion_list[] =
 {
 	analog_convert_triple,
 	analog_convert_thermistor,
-	analog_convert_ph
+	analog_convert_ph,
+	analog_convert_turbidity
 };
 
 
@@ -120,6 +123,15 @@ float analog_convert_ph(int analog)
 	float pHValue = 3.5*voltage + PH_Offset;
 
 	return pHValue;
+}
+
+
+float analog_convert_turbidity(int analog)
+{
+
+	float voltage = analog_convert_voltage(analog);
+
+	return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 }
 
 
