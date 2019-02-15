@@ -305,6 +305,10 @@ void package_data(OSCBundle *bndl)
 		package_sht31d(bndl, configuration.packet_header_string);
 	#endif
 
+	#if is_hx711 == 1
+		package_hx711(bndl, configuration.packet_header_string);
+	#endif
+
 	#if is_ads1231 == 1
 		package_ads1231(bndl, configuration.packet_header_string);
 	#endif

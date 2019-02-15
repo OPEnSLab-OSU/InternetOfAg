@@ -28,8 +28,8 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY_NUM       0		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define CHANNEL          2		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -187,7 +187,7 @@
 #define button_pin 		10	// Pin button is attached to 
 
 // --- Analog Setting --- 
-#define is_analog     0		// 1 if analog input is being used, 0 if not
+#define is_analog     1		// 1 if analog input is being used, 0 if not
 
 	#define is_analog_a0 1 
 	#define is_analog_a1 1
@@ -210,7 +210,7 @@
 #define is_tsl2591         0	// Lux Sensor
 #define is_tsl2561         0	// Lux Sensor [cannot be used with AS726X or AS7265X]
 	#if is_tsl2561 == 1
-		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
+		#define tsl2561_res 1 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
 	#endif
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
@@ -244,7 +244,7 @@
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	#define DEFAULT_MODE      AP_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 
@@ -385,12 +385,12 @@
 // ================================================================
 #if is_evaporimeter == 1
 	#define hub_node_type 1			// Don't change, as all Evaporimeters are nodes, hubs are not Evaporometers
-	#define is_lora       1		
+	#define is_lora       0		
 
 	// Lux Sensor
-	#define is_tsl2561 0   // check bottom of file for which i2c addresses are in use for the TSL2561s
+	#define is_tsl2561 1   // check bottom of file for which i2c addresses are in use for the TSL2561s
 	#if is_tsl2561 == 1
-		#define tsl2561_res 3
+		#define tsl2561_res 1
 	#endif
 
 	// Load Cell
@@ -403,7 +403,7 @@
 	#define is_sht31d 1
 
 	// RTC
-	#define is_rtc 1
+	#define is_rtc 0
 	#if is_rtc == 1
 		#define RTC_pin    6
 		#define is_rtc3231 1
@@ -641,7 +641,7 @@
 		#define analog_a0_conversion -1
 	#endif 
 	#if is_analog_a1 == 1
-		#define analog_a1_conversion -1
+		#define analog_a1_conversion 3
 	#endif
 	#if is_analog_a2 == 1
 		#define analog_a2_conversion -1
@@ -799,8 +799,8 @@
 #endif
 
 #if is_ms5803 == 1
-	#define i2c_addr_ms5803_0x76 	0 // Default
-	#define i2c_addr_ms5803_0x77	1
+	#define i2c_addr_ms5803_0x76 	1 // Default
+	#define i2c_addr_ms5803_0x77	0
 
 	#if is_multiplexer != 1
 		#if i2c_addr_ms5803_0x76 == 1
@@ -818,10 +818,10 @@
 
 	#if is_multiplexer != 1
 		#if i2c_addr_sht31d_0x44 == 1
-			#define sht31d_0x44_name "SHT31D_0x44"
+			#define sht31d_0x44_name ""
 		#endif 
 		#if i2c_addr_sht31d_0x45 == 1
-			#define sht31d_0x45_name "SHT31D_0x45"
+			#define sht31d_0x45_name ""
 		#endif 
 	#endif
 #endif
@@ -834,10 +834,10 @@
 	
 	#if is_multiplexer != 1
 		#if i2c_addr_tsl2561_0x29 == 1
-			#define tsl2561_0x29_name "TSL2561_0x29"
+			#define tsl2561_0x29_name "upper"
 		#endif 
 		#if i2c_addr_tsl2561_0x39 == 1
-			#define tsl2561_0x39_name "TSL2561_0x39"
+			#define tsl2561_0x39_name "lower"
 		#endif 
 		#if i2c_addr_tsl2561_0x49 == 1
 			#define tsl2561_0x49_name "TSL2561_0x49"
