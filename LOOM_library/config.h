@@ -638,7 +638,7 @@
 #if enable_analog_conversions == 1
 
 	#if is_analog_a0 == 1
-		#define analog_a0_conversion -1
+		#define analog_a0_conversion 6
 	#endif 
 	#if is_analog_a1 == 1
 		#define analog_a1_conversion -1
