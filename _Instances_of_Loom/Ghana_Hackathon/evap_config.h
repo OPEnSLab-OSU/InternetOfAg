@@ -217,7 +217,7 @@
 #if is_wifi == 1
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
-	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
+	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
 
@@ -472,11 +472,11 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
-	#define init_spreadsheet_id "***REMOVED***"  // Ghana Proto Sheet
+	#define init_spreadsheet_id "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU"  // Ghana Proto Sheet
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
-	char device_id[] = "***REMOVED***"; 	// Opens
+	char device_id[] = "vBC42D81EEEB62D5"; 	// Opens
 
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
@@ -507,17 +507,17 @@
 		// 0–9 : Sheet ID for corresponding subnet #
 		// Only fill out number of IDs being used
 		const char* spreadsheet_list[8] = {
-			"***REMOVED***",
-			"***REMOVED***",
-			"***REMOVED***",
-			"***REMOVED***",
-			"***REMOVED***",
-			"***REMOVED***",
-			"***REMOVED***",
-			"***REMOVED***"
+			"1L6Rr6H-5PFbbZIBKmR5mkGTztqA8xQhJeOW4Bn7ec8c",
+			"1vgVBCv2nbCc8RGcb44-bgRtxKWvp2sIu7iu9w8rtWv4",
+			"1_VTY97xWlx8WzRJ5r2NbRzPFYiorViDu4RqYo_l_mCA",
+			"1zxA4a_w4dzsZHsNXXaqaXSu5cdpg-TzhzlKNBVbFUWg",
+			"1yfj8ICAPvqoDP8xMGu5Hm7RQrj1RM0lvDf2PEee2kz4",
+			"1G4kxtvN4_Vrzr5typTv3zybjythn25fuJBOgLFILf14",
+			"1qajmatMnUyUohkQIJdjNhN1wSZVmDnS7ZSttaI3Jiqk",
+			"1GlPYY3-DG9fhB4OVuebWzOBLT-AlLE7JLGFLmMC_UFw"
 		};
 
-		#define pb_default_sheet "***REMOVED***" 	// Default sheet to use if family number is out of range, 
+		#define pb_default_sheet "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU" 	// Default sheet to use if family number is out of range, 
 																			 		// can be duplicate of an element in the array
 	#endif
 

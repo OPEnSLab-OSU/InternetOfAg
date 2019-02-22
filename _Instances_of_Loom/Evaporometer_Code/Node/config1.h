@@ -110,7 +110,7 @@
 #if is_wifi == 1
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
-	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
+	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
 // --- Scripts ---
@@ -321,7 +321,7 @@
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
-	#define spreadsheet_id "***REMOVED***"  // This is Luke's Arduino Test spreadsheet
+	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
 	#define useHubTabID 0
@@ -335,7 +335,7 @@
 
 
 	// Required by PushingBox, specific to each scenario
-	char device_id[]   = "***REMOVED***";
+	char device_id[]   = "v7ECCEF7A460E57A";
 
 	// Currently works by only sending a bundle from 
 	// log_bundle/sendToPushingBox if the delay has passed
