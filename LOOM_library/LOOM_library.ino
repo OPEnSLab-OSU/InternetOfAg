@@ -43,8 +43,9 @@ void loop()
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
 	print_bundle(&bndl);
 	
-	log_bundle(&bndl, SDCARD, "evapdata.csv");
-	send_bundle(&bndl, WIFI);
+
+	// log_bundle(&bndl, SDCARD, "evapdata.csv");
+	// send_bundle(&bndl, WIFI);
 	// 
 	delay(1000);
 
