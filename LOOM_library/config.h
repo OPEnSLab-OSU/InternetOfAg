@@ -78,7 +78,7 @@
 // Can override settings defined before the aggregate devices
 
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
