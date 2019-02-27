@@ -25,6 +25,12 @@ void setup()
 	Loom_begin();	
 
 	// Any custom setup code
+	pinMode(5, INPUT_PULLUP);
+	pinMode(6, INPUT_PULLUP);
+	// pinMode(7, INPUT_PULLUP);
+	// pinMode(8, INPUT_PULLUP);
+	// pinMode(9, INPUT_PULLUP);
+	// pinMode(10, INPUT_PULLUP);
 }
 
 // ================================================================ 
@@ -41,13 +47,24 @@ void loop()
 
 	measure_sensors();				// Read sensors, store data in sensor state struct
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
+
+	append_to_bundle_key_value(&bndl, "pin5", digitalRead(5));
+	append_to_bundle_key_value(&bndl, "pin6", digitalRead(6));
+	// append_to_bundle_key_value(&bndl, "pin7", digitalRead(7));
+	// append_to_bundle_key_value(&bndl, "pin8", digitalRead(8));	
+	// append_to_bundle_key_value(&bndl, "pin9", digitalRead(9));
+	// append_to_bundle_key_value(&bndl, "pin10", digitalRead(10));
+
+	// append_to_bundle_key_value(&bndl, "pin10", digitalRead(10));
+
+
 	print_bundle(&bndl);
 	
 
 	// log_bundle(&bndl, SDCARD, "evapdata.csv");
 	// send_bundle(&bndl, WIFI);
 	// 
-	delay(1000);
+	delay(100);
 
 	additional_loop_checks();		// Miscellaneous checks
 
