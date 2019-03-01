@@ -39,8 +39,7 @@
 #define FAHRENHEIT
 #define CELCIUS
 
-float CJTemp;
-float TCTemp;
+
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -55,7 +54,10 @@ struct state_max31856_t{
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
+
 float tc_vin;
+float CJTemp;
+float TCTemp;
 
 //Provide CS pin to initialize hardward SPI
 // Adafruit_MAX31856 max = Adafruit_MAX31856(CS_PIN);
