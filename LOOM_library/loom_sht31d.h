@@ -132,15 +132,15 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[])
 	char address_string[80];
 
 	#if i2c_addr_sht31d_0x44 == 1
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x44_name, "temp");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x44_name, "_temp");
 		bndl->add(address_string).add(state_sht31d_0x44.temp);
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x44_name, "humid");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x44_name, "_humid");
 		bndl->add(address_string ).add(state_sht31d_0x44.humid);
 	#endif
 	#if i2c_addr_sht31d_0x45 == 1
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x45_name, "temp");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x45_name, "_temp");
 		bndl->add(address_string).add(state_sht31d_0x45.temp);
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x45_name, "humid");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", sht31d_0x45_name, "_humid");
 		bndl->add(address_string ).add(state_sht31d_0x45.humid);
 	#endif
 }

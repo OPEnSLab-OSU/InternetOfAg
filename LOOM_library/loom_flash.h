@@ -151,7 +151,11 @@ void setup_flash_config()
 			#if is_wifi == 1
 				configuration.config_wifi.my_ssid = AP_NAME;                   // Default AP name
 				strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);        // Default network name
-				strcpy(configuration.config_wifi.pass,DEFAULT_PASSWORD);       // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+        #ifndef DEFAULT_PASSWORD
+				  strcpy(configuration.config_wifi.pass, configuration.config_wifi.pass);       // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+				#else
+          strcpy(configuration.config_wifi.pass,DEFAULT_PASSWORD);       // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+				#endif
 				configuration.config_wifi.keyIndex     = 0;                    // Your network key Index number (needed only for WEP)
 				configuration.config_wifi.ip_broadcast = "255.255.255.255";    // IP to Broadcast data 
 				configuration.config_wifi.devicePort   = INIT_PORT;            // Local port to listen on

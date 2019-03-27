@@ -25,8 +25,8 @@
 
 //Thermocouple type definition
 #define TCTYPE K_TYPE
-// #define TCTYPE VMODE_G32
-// #define TCTYPE VMODE_G8
+//#define TCTYPE VMODE_G32
+//#define TCTYPE VMODE_G8
 
 //Defines gain for calculating voltage for VMODEs
 #if   TCTYPE == VMODE_G32
@@ -38,7 +38,6 @@
 //Thermocouple unit definition
 #define FAHRENHEIT
 #define CELCIUS
-
 
 
 // ================================================================ 
@@ -54,15 +53,14 @@ struct state_max31856_t{
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-
 float tc_vin;
 float CJTemp;
 float TCTemp;
 
 //Provide CS pin to initialize hardward SPI
-// Adafruit_MAX31856 max = Adafruit_MAX31856(CS_PIN);
+//Adafruit_MAX31856 max = Adafruit_MAX31856(CS_PIN);
+// Use software SPI: CS, DI, DO, CLK
 Adafruit_MAX31856 max = Adafruit_MAX31856(10, 11, 12, 13);
-
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -107,26 +105,26 @@ void setup_max31856()
 //
 void package_max31856(OSCBundle *bndl, char packet_header_string[]) 
 {
-	char address_string[255];
+	char addres_string[255];
 	#if TCTYPE == K_TYPE
 	
-		#ifdef CELCIUS
-			sprintf(address_string, "%s%s", packet_header_string, "/CJTemp_C");
-			bndl->add(address_string).add(CJTemp);
-			sprintf(address_string, "%s%s", packet_header_string, "/TCTemp_C");
-			bndl->add(address_string ).add(TCTemp);
-		#endif
-		
-		#ifdef FAHRENHEIT
-			sprintf(address_string, "%s%s", packet_header_string, "/CJTemp_F");
-			bndl->add(address_string).add((float)(CJTemp * 1.8 + 32.));
-			sprintf(address_string, "%s%s", packet_header_string, "/TCTemp_F");
-			bndl->add(address_string).add((float)(TCTemp * 1.8 + 32.));
-		#endif
+	#ifdef CELCIUS
+		sprintf(addres_string, "%s%s", packet_header_string, "/CJTemp_C");
+		bndl->add(addres_string).add((float)CJTemp);
+		sprintf(addres_string, "%s%s", packet_header_string, "/TCTemp_C");
+		bndl->add(addres_string ).add((float)TCTemp);
+	#endif
+	
+	#ifdef FAHRENHEIT
+		sprintf(addres_string, "%s%s", packet_header_string, "/CJTemp_F");
+		bndl->add(addres_string).add((float)(CJTemp * 1.8 + 32));
+		sprintf(addres_string, "%s%s", packet_header_string, "/TCTemp_F");
+		bndl->add(addres_string).add((float)(TCTemp * 1.8 + 32));
+	#endif
 	
 	#elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
-		sprintf(address_string, "%s%s", packet_header_string, "/31856_voltage");
-		bndl->add(address_string).add(tc_vin);
+		sprintf(addres_string, "%s%s", packet_header_string, "/voltage");
+		bndl->add(addres_string).add((float)(tc_vin));
 	#endif
 }
 

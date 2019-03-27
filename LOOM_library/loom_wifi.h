@@ -324,15 +324,22 @@ void start_AP()
 //
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
-	status = WiFi.begin(ssid, pass);
+	#ifndef DEFAULT_PASSWORD
+    status = WiFi.begin(ssid);
+  #else
+    status = WiFi.begin(ssid, pass);
+  #endif
 	int attempt_count = 0;
 
 	// Try to connect, attempting the connection up to 10 times (this number is arbitrary)
 	while (status != WL_CONNECTED && attempt_count < 10) {
 		LOOM_DEBUG_Println("Connecting to WPA host failed, trying again");
-		
+#ifndef DEFAULT_PASSWORD
+    status = WiFi.begin(ssid);
+#else
 		status = WiFi.begin(ssid, pass);
-		attempt_count++;
+#endif
+	attempt_count++;
 	}
 
 	// If not successfully connected

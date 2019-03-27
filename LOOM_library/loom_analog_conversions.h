@@ -27,14 +27,10 @@ typedef float (*convertRetFuncPtr)(int);
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-float analog_convert_voltage(int analog); 
 float analog_convert_triple(int analog); // example
+float analog_convert_voltage(int analog); // example
 float analog_convert_thermistor(int analog);
 float analog_convert_ph(int analog);
-
-float analog_convert_turbidity(int analog);
-float analog_convert_ec(int analog);
-float analog_convert_tds(int analog);
 
 
 // ================================================================ 
@@ -43,13 +39,9 @@ float analog_convert_tds(int analog);
 
 static convertRetFuncPtr conversion_list[] = 
 {
-	analog_convert_voltage,			// 0
-	analog_convert_triple,			// 1 
-	analog_convert_thermistor,		// 2
-	analog_convert_ph,				// 3
-	analog_convert_turbidity,		// 4
-	analog_convert_ec,				// 5
-	analog_convert_tds 				// 6
+	analog_convert_triple,
+	analog_convert_thermistor,
+	analog_convert_ph
 };
 
 
@@ -124,47 +116,15 @@ float analog_convert_thermistor(int analog)
 
 float analog_convert_ph(int analog)
 {
-	float voltage = analog_convert_voltage(analog);
-	
+	float voltage = analog*3.3/4096.0;
 	float pHValue = 3.5*voltage + PH_Offset;
 
 	return pHValue;
 }
 
 
-float analog_convert_turbidity(int analog)
-{
-	float voltage = analog_convert_voltage(analog);
-
-	return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
-}
 
 
-
-
-#define EC_TEMP 25
-
-float analog_convert_ec(int analog)
-{
-	float voltage = analog_convert_voltage(analog);
-
-	float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
-	float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
-	float EC = ( 133.42 * comp_volt * comp_volt * comp_volt - 255.86 * comp_volt * comp_volt + 857.39 * comp_volt ); //convert voltage value to EC value
-	
-	return EC;	
-}
-
-float analog_convert_tds(int analog)
-{
-	float voltage = analog_convert_voltage(analog);
-
-	float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
-	float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
-	float TDS = ( 133.42 * comp_volt * comp_volt * comp_volt - 255.86 * comp_volt * comp_volt + 857.39 * comp_volt ) * 0.5; //convert voltage value to TDS value
-	
-	return TDS;	
-}
 
 
 

@@ -83,6 +83,7 @@ float         vbat;                    	 		// Place to save measured battery vol
 char          ReplyBuffer[] = "acknowledged"; 	// A string to send back
 uint32_t      button_timer;                   	// Time that the button has been held
 int           button_state;					  	// Variable to hold the state of the button
+int           switch_state;              // Variable to hold the state of the switch
 char          global_packet_header_string[80]; 	// Sometimes functions need to access the header string but are declared before loom_flash.h is included
 bool 		  routing_match; 					// Used to end msg_routing early if match was found
 OSCErrorCode  error;                          	// Hold errors from OSC

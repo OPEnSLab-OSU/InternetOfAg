@@ -78,19 +78,19 @@ bool setup_tsl2561()
 	#if i2c_addr_tsl2561_0x29 == 1
 		if (!inst_tsl2561_0x29.begin()) {
 			LOOM_DEBUG_Println("No TSL2561 sensor found with I2C selection to ground ... check your wiring?");
-			// while (1);
+			while (1);
 		}
 	#endif
 	#if i2c_addr_tsl2561_0x39 == 1
 		if (!inst_tsl2561_0x39.begin()) {
 			LOOM_DEBUG_Println("No TSL2561 sensor found with I2C selection to float ... check your wiring?");
-			// while (1);
+			while (1);
 		}
 	#endif
 	#if i2c_addr_tsl2561_0x49  == 1
 		if (!inst_tsl2561_0x49.begin()) {
 			LOOM_DEBUG_Println("No TSL2561 sensor found with I2C selection to high ... check your wiring?");
-			// while (1);
+			while (1);
 		}
 	#endif
 
@@ -164,15 +164,15 @@ void package_tsl2561(OSCBundle *bndl, char packet_header_string[])
 		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x29.lightFull );
 	#endif
 	#if i2c_addr_tsl2561_0x39 == 1
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x39_name, "_ir");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x39_name, "_ir_f");
 		bndl->add(address_string).add( (int32_t)state_tsl2561_0x39.lightIR );
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x39_name, "_full");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x39_name, "_full_f");
 		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x39.lightFull );
 	#endif
 	#if i2c_addr_tsl2561_0x49 == 1
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x49_name, "_ir");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x49_name, "_ir_");
 		bndl->add(address_string).add( (int32_t)state_tsl2561_0x49.lightIR );
-		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x49_name, "_full");
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x49_name, "_full_");
 		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x49.lightFull );
 	#endif
 }

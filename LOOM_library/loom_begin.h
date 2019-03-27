@@ -56,6 +56,11 @@ void Loom_begin()
 	#ifdef is_button
 		pinMode(button_pin, INPUT_PULLUP); 
 	#endif
+
+  // Set the button pin mode to input
+  #ifdef is_switch
+    pinMode(switch_pin, INPUT_PULLUP); 
+  #endif
 	
 
 	// Setup sensors and actuators by calling the respective setups

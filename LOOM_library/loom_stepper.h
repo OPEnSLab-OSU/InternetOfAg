@@ -57,7 +57,7 @@ void setup_stepper()
 	
 	yield();
 	set_stepper_steps(0,0,60,50);
-	set_stepper_steps(1,0,60,50);
+	//set_stepper_steps(1,0,60,50);
 }
 
 

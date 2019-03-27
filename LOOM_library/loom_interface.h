@@ -148,8 +148,13 @@ void measure_sensors()
 
 	//	Get button state
 	#if is_button == 1
-		button_state = digitalRead(button_pin);
+		button_state = digitalRead(button_pin) ^ 1; // Invert because Low-True
 	#endif
+
+  //  Get button state
+  #if is_switch == 1
+    switch_state = digitalRead(switch_pin);
+  #endif
 	
 	//	Measure multiplexer sensors
 	// #if is_multiplexer == 1
@@ -273,6 +278,12 @@ void package_data(OSCBundle *bndl)
 		bndl->add(address_string).add((int32_t)button_state);
 	#endif
 
+  // Add button state
+  #if is_switch == 1
+    sprintf(address_string, "%s%s", configuration.packet_header_string, "/switch");
+    bndl->add(address_string).add((int32_t)switch_state);
+  #endif
+
 	// //	Add multiplexer sensor data
 	// #if is_multiplexer == 1
 	// 	package_tca9548a(bndl, configuration.packet_header_string);
@@ -303,10 +314,6 @@ void package_data(OSCBundle *bndl)
 	#if is_sapflow == 1 && hub_node_type == 1
 		package_sapflow(bndl, configuration.packet_header_string);
 		package_sht31d(bndl, configuration.packet_header_string);
-	#endif
-
-	#if is_hx711 == 1
-		package_hx711(bndl, configuration.packet_header_string);
 	#endif
 
 	#if is_ads1231 == 1
