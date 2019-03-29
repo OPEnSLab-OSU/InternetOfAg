@@ -1,4 +1,7 @@
 gLogger Example
 Log Data over internet via PushingBox to Google Spreadsheets
+
+Copu and paste-replace the contents of each file into the corresponding tab in your Arduino IDE
+
 Follow this tutorial for more help:
 https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/PushingBox
