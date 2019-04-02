@@ -120,8 +120,8 @@
 #if is_wifi == 1
   #define DEFAULT_MODE      WPA_CLIENT_MODE // AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
   #define DEFAULT_NETWORK   "OSU_Access"      // Network SSID / name
-  //#define DEFAULT_NETWORK   "SkyNet"      // Network SSID / name
-  //#define DEFAULT_PASSWORD  "8|6e81G9"    // Network password
+  //#define DEFAULT_NETWORK   "Some_SSID"      // Network SSID / name
+  //#define DEFAULT_PASSWORD  "Some_Password"    // Network password
 
 #endif
 
