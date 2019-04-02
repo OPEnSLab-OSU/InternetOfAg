@@ -43,9 +43,9 @@ void loop()
   process_bundle(&bndl);        // Dispatch message to correct handling functions
   measure_sensors();          // Read sensors, store data in sensor structs
   package_data(&send_bndl);     // Copy sensor data from state to provided bundle
-  send_bundle(&send_bndl, WIFI);    // Send bundle of packaged data
-  print_bundle(&send_bndl);
-//  log_bundle(&send_bndl, PUSHINGBOX);  // Send bundle to Google Sheet
+  // send_bundle(&send_bndl, WIFI);    // Send bundle of packaged data
+  // print_bundle(&send_bndl);
+  log_bundle(&send_bndl, GOOGLESHEETS);  // Send bundle to Google Sheet
   additional_loop_checks();     // Miscellaneous checks
 
 }

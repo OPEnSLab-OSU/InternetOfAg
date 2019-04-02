@@ -187,6 +187,9 @@ void Loom_begin()
 	#if is_pushingbox == 1
 		setup_pushingbox();
 	#endif
+	#if is_googlesheets == 1
+		setup_googlesheets();
+	#endif
 
 
 	// If hub and advanced interdev. comm., 

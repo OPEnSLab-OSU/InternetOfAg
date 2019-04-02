@@ -119,17 +119,20 @@
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
   #define DEFAULT_MODE      WPA_CLIENT_MODE // AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-  //#define DEFAULT_NETWORK   "OSU_Access"      // Network SSID / name
-  #define DEFAULT_NETWORK   "Chet"      // Network SSID / name
-  #define DEFAULT_PASSWORD  "arduino101"    // Network password
+  #define DEFAULT_NETWORK   "OSU_Access"      // Network SSID / name
+  //#define DEFAULT_NETWORK   "SkyNet"      // Network SSID / name
+  //#define DEFAULT_PASSWORD  "8|6e81G9"    // Network password
 
 #endif
 
 
 // ================================================================ 
 // ===                  DATA LOGGING PLATFORMS                  === 
-// ================================================================
-#define is_pushingbox 0   // 1 to enable PushingBox  
+// ================================================================ 
+#define is_googlesheets 1 // 1 to enable google sheets functionality
+/** This library is depricated! Please only use it if you have to. */
+/** See https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/PushingBox/GoogleSheets_README.md */
+#define is_pushingbox 0		// 1 to enable PushingBox  
 
 
 // --- RTC Options ---
@@ -203,8 +206,25 @@
 // --- PushingBox Options ---
 #if (is_ethernet != 1) && (is_wifi != 1) && (is_fona != 1)
   #define is_pushingbox 0   // Prevent PushingBox if no means of internet access
+	#define is_googlesheets 0
 #endif
-#if is_pushingbox == 1  
+
+#if (is_wifi != 1) && (is_googlesheets == 1)
+  #warn "Cannot use google sheets without wifi enabled in config.h!"
+  #define is_googlesheets 0
+#endif
+
+
+// --- PushingBox Deprication ---
+#if is_pushingbox == 1 && is_googlesheets == 1
+	#error "Cannot use Google Sheets and PushingBox at the same time! Check the config.h (googlesheets may turn on automatically with wifi)"
+#endif
+#if is_pushingbox
+	#warning "You are using PushingBox, which is depracated! More info here: https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/PushingBox/GoogleSheets_README.md"
+#endif
+
+// --- PushingBox/GoogleSheets Options ---
+#if is_pushingbox == 1 || is_googlesheets == 1
   // Google Spreadsheet ID
   // (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
   #define init_spreadsheet_id "1TlNG52wIreG9Kg6aZygFUJsuaTiAwDAlqlxH5VoiTCI"  // Chet's Test Sheet
@@ -469,7 +489,10 @@
 // ================================================================
 
 #if (hub_node_type == 0) && ((is_wifi == 1) || (is_ethernet == 1) || (is_fona == 1))
-  #define is_pushingbox 1       // Auto enable PushingBox if Ethernet, WiFi, or cellular
+  // #define is_pushingbox 1       // Auto enable PushingBox if Ethernet, WiFi, or cellular
+  #if is_pushingbox == 0
+		#define is_googlesheets 1
+	#endif
 
   #define device_poll_refresh 0   // Seconds between re-searching for devices on the network
                   // Set 0 or negative to disable
@@ -489,5 +512,3 @@
 #else
   #define is_sleep_interrupt 11     // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 #endif
-
-

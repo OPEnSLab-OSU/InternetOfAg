@@ -79,6 +79,18 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		// Set minimum delay between PushingBox uploads
 		if (msg.dispatch("/SetPushMinDelay", 	set_push_min_delay, 	addrOffset) ) return;
 	#endif
+
+	#if is_googlesheeys == 1
+		// Sends data to Google sheets via SSL
+		if (msg.dispatch("/SendToPB", 			sendToGoogleSheets, 		addrOffset) ) return;
+		if (msg.dispatch("/SendToGS", 			sendToGoogleSheets, 		addrOffset) ) return;
+		// Sets which Google spreadsheet to upload to 
+		if (msg.dispatch("/SetSpreadSheetID", 	set_spreadsheet_id_gs, 		addrOffset) ) return;
+		// Sets which tab of the Google spreadsheet to upload to 
+		if (msg.dispatch("/SetTabID", 			set_tab_id_gs,			 	addrOffset) ) return;
+		// Set minimum delay between PushingBox uploads
+		if (msg.dispatch("/SetPushMinDelay", 	set_push_min_delay_gs, 		addrOffset) ) return;
+	#endif
 	
 	#if is_wifi == 1
 		// Credentials to connect to a WiFi network

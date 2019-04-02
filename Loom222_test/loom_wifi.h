@@ -61,7 +61,7 @@ WiFiUDP 	UdpGlobal;
 WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
-#if is_adafruitio == 1 || is_pushingbox == 1
+#if is_adafruitio == 1 || is_pushingbox == 1 || is_googlesheets == 1
 	WiFiClient wifi_client;
 #endif
 

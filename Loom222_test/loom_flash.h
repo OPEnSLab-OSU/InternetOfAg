@@ -39,6 +39,10 @@ struct config_flash_t {
 		struct config_pushingbox_t config_pushingbox;
 	#endif
 
+	#if is_googlesheets == 1
+		struct config_googlesheets_t config_googlesheets;
+	#endif
+
 
 	//add any other stuff that needs to be stored based on the shields with a wrapped preprocessor statement HERE
 
@@ -127,6 +131,9 @@ void setup_flash_config()
 		link_config_pushingbox(&configuration.config_pushingbox);
 	#endif
 
+	#if is_googlesheets == 1
+		link_config_googlesheets(&configuration.config_googlesheets);
+	#endif
 
 	#if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
 

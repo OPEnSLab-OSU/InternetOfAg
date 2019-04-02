@@ -113,6 +113,9 @@ enum LogPlatform {
 	#if (is_pushingbox == 1) || (prevent_platform_compile_error == 1)
 		PUSHINGBOX,
 	#endif
+	#if (is_googlesheets == 1) || (prevent_platform_compile_error == 1)
+		GOOGLESHEETS,
+	#endif
 	#if (is_oled == 1) || (prevent_platform_compile_error == 1)
 		OLED,
 	#endif
@@ -260,6 +263,9 @@ void flash_led();
 #endif
 #if is_pushingbox == 1
 	#include "loom_pushingbox.h"
+#endif
+#if is_googlesheets == 1
+	#include "loom_googlesheets.h"
 #endif
 #if is_lora == 1
 	#include "loom_lora.h"

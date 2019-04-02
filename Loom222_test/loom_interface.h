@@ -504,6 +504,13 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 			return;	
 		#endif
 
+		#if is_googlesheets == 1
+		case GOOGLESHEETS : 
+			// LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+			sendToGoogleSheets(log_bndl);
+			return;	
+		#endif
+
 		// #if is_adafruitio == 1
 		// 	case ADAFRUITIO : 
 		// 		LOOM_DEBUG_Println("Error: Adafruit IO doesn't take a filename"); 
