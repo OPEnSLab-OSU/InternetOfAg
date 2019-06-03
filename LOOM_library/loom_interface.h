@@ -297,7 +297,7 @@ void package_data(OSCBundle *bndl)
 	#endif
 
 	#if is_decagon == 1
-		package_decagon(&bndl, configuration.packet_header_string);
+		package_decagon(bndl, configuration.packet_header_string);
 	#endif
 
 	#if is_sapflow == 1 && hub_node_type == 1
