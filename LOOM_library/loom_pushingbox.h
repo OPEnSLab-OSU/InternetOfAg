@@ -481,8 +481,3 @@ bool check_family_match(OSCMessage* msg)
 	osc_extract_header_section(msg, 1, source);
 	return (strcmp(FAMILY STR(FAMILY_NUM), source) == 0);
 }
-
-
-
-
-

@@ -440,5 +440,3 @@ void print_DateTime(DateTime time)
 	LOOM_DEBUG_Print(time.minute()); LOOM_DEBUG_Print(':');
 	LOOM_DEBUG_Print(time.second()); LOOM_DEBUG_Println();
 }
-
-

@@ -131,10 +131,3 @@ void handle_stepper_msg(OSCMessage &msg)
 	// 	nrf_send_bundle(&bndl);
 	// #endif
 }
-
-
-
-
-
-
-

@@ -1487,5 +1487,3 @@ void append_to_bundle_key_value_block(OSCBundle *bndl, char* keys[], T elems[], 
 
 	bndl->add(msg);
 }
-
-

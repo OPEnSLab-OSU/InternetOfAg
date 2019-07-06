@@ -15,7 +15,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define chipSelect 10 	// Adafruit Feathers use GPIO 10
+#define chipSelect 4 	// Adafruit Feathers use GPIO 10
 						// This can be changed if also using Ethernet 
 						// Featherwing which uses the same CS pin
 
@@ -567,6 +567,3 @@ void broadcastSaved()
 	out_bndl.empty();		// Empty the bundle to free room for a new one
 
 }
-
-
-

@@ -279,9 +279,3 @@ void measure_as7265X()
 }
 
 	
-
-
-
-
-
-

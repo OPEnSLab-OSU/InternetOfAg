@@ -115,9 +115,3 @@ void measure_hx711()
 	state_hx711.loadcell = inst_hx711.get_units(5);
 	inst_hx711.power_down();
 }
-
-
-
-
-
-

@@ -641,4 +641,3 @@ uint32_t get_time_wifi()
 {
 	return WiFi.getTime();
 }
-

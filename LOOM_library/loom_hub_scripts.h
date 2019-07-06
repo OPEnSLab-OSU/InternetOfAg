@@ -699,6 +699,3 @@ retFuncPtr strToFunc(char * str) {
 	// Custom functions get called here
 	return custom_strToFunc(str);
 }
-
-
-

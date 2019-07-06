@@ -267,6 +267,3 @@ void run_sapflowmeter(OSCBundle *bndl)
       }
     #endif // of is_node
 }
-
-
-

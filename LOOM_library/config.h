@@ -27,7 +27,7 @@
 // ===                  IDENTIFICATION OPTIONS                  === 
 // ================================================================
 // --- Device Identification --- 
-#define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
+#define FAMILY 		"LaManna"		// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       0		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -100,7 +100,7 @@
 
 
 // --- RTC Options ---
-#define is_rtc        0		// Enable RTC functionality
+#define is_rtc        1		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 		6	// What pin the RTC interrupt is connected to
 
@@ -127,7 +127,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         0		// 1 to enable SD card 
+#define is_sd         1		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -187,11 +187,11 @@
 #define button_pin 		10	// Pin button is attached to 
 
 // --- Analog Setting --- 
-#define is_analog     0		// 1 if analog input is being used, 0 if not
+#define is_analog     1		// 1 if analog input is being used, 0 if not
 
 	#define is_analog_a0 1 
-	#define is_analog_a1 1
-	#define is_analog_a2 0
+	#define is_analog_a1 0
+	#define is_analog_a2 1
 	#define is_analog_a3 0
 	#define is_analog_a4 0
 	#define is_analog_a5 0
@@ -200,7 +200,7 @@
 
 
 // --- Decagon Soil Moisture ---
-#define is_decagon    0		// 1 if GS3 Decagon is being used
+#define is_decagon    1		// 1 if GS3 Decagon is being used
 
 // --- I2C Sensors ---
 // Using I2C sensors without the multiplexer
@@ -641,7 +641,7 @@
 #if enable_analog_conversions == 1
 
 	#if is_analog_a0 == 1
-		#define analog_a0_conversion 6
+		#define analog_a0_conversion -1
 	#endif 
 	#if is_analog_a1 == 1
 		#define analog_a1_conversion -1
@@ -871,6 +871,3 @@
 		#endif 
 	#endif
 #endif
-
-
-

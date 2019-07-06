@@ -251,9 +251,3 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
 // analogReadResolution(8);
 // Serial.print(", 8-bit : ");
 // Serial.println(analogRead(A0));
-
-
-
-
-
-

@@ -205,5 +205,3 @@ void measure_ms5803()
 		#endif
 	#endif
 }
-
-

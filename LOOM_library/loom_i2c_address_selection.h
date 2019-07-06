@@ -62,6 +62,3 @@
 	#define i2c_addr_zxgesturesensor_0x10 	1 // Default
 	#define i2c_addr_zxgesturesensor_0x11	0
 #endif
-
-
-

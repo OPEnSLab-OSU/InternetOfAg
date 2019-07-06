@@ -284,9 +284,3 @@ void measure_zxgesturesensor()
 
 
 }
-
-
-
-
-
-

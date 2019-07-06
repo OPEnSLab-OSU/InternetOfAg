@@ -185,6 +185,3 @@ void setup_flash_config()
 	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
 
 }
-
-
-

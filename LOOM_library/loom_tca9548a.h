@@ -667,10 +667,3 @@ void setup_mux_sensors()
 		} // of switch
 	} // of for
 }
-
-
-
-
-
-
-

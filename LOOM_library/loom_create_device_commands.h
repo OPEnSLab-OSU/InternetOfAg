@@ -93,8 +93,3 @@ void build_stepper_cmd(OSCBundle *bndl, char* device, int motor, int direction, 
 	
 	bndl->add(msg);
 }
-
-
-
-
-

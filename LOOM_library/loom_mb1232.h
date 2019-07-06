@@ -160,8 +160,3 @@ void measure_mb1232()
 		LOOM_DEBUG_Println("Error reading from mb1232 (range)");
 	}       
 }
-
-
-
-
-
