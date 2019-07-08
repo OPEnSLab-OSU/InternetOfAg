@@ -65,7 +65,7 @@ void loop()
 	// send_bundle(&bndl, WIFI);
 	// 
 	//delay(100);
-  sleep_for(1, MINUTES, STANDBY);
+  sleep_for(15, MINUTES, STANDBY);
 
 	additional_loop_checks();		// Miscellaneous checks
 

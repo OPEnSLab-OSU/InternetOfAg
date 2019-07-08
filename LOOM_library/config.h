@@ -113,7 +113,7 @@
 		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
 	};
 
-	TimeZone timezone = PST;
+	TimeZone timezone = PDT;
 
 	// Select only one of the below options
 	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
